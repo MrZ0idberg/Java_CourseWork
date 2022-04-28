@@ -80,7 +80,7 @@ public class LoginController implements Initializable {
         if(!connDB.checkConnection()) {
             loginMassageLabel.setText("Відсутній зв'язок з ДП, перевірте налаштування");
         }else if (connDB.validateLoginDB(login, password)){
-            m.changeScene("/makets/MainStage.fxml");
+            m.changeScene("/makets/MainStageForWorkers.fxml");
         }else{
             loginMassageLabel.setText("Невірка комбінація логіну/паролю");
         }
