@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,11 +32,9 @@ public class LoginSettingDBController implements Initializable{
     @FXML
     public Label informLabel;
 
-
-
-
-
-
+    /**
+     * Ініціалізація вікна для входу
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         String login;
@@ -45,6 +42,9 @@ public class LoginSettingDBController implements Initializable{
         String address;
         String name;
 
+        /*
+         * Початкове завантаження значень з налаштувань в текстові поля програми
+         */
         Properties properties = new Properties();
         try {
             FileInputStream in = new FileInputStream("settings.properties");
@@ -54,23 +54,28 @@ public class LoginSettingDBController implements Initializable{
             e.printStackTrace();
         }
 
+        //Отримання налаштувань з файлу
         login = properties.getProperty("db.login");
         pass = properties.getProperty("db.password");
         address = properties.getProperty("db.address");
         name = properties.getProperty("db.name");
 
+        //Встановлення тексту в комірках
         loginDBTextField.setText(login);
         passField.setText(pass);
         nameDBTextField.setText(name);
         addressDBTextField.setText(address);
     }
 
+    /**
+     * Обробка події натискання на кнопку збереження
+     * Збеження данних в файлі конфігурації
+     */
     public void saveButtonOnAction(ActionEvent event){
         String login;
         String pass;
         String address;
         String name;
-
 
         Properties properties = new Properties();
 
@@ -82,19 +87,19 @@ public class LoginSettingDBController implements Initializable{
             e.printStackTrace();
         }
 
-
+        //Отримання значень з текстових полів
         login = loginDBTextField.getText();
         pass = passField.getText();
         address = addressDBTextField.getText();
         name = nameDBTextField.getText();
 
-
+        //Запис значень, в об'єкт конфігурації
         properties.setProperty("db.login",login);
         properties.setProperty("db.password",pass);
         properties.setProperty("db.address",address);
         properties.setProperty("db.name",name);
 
-
+        //Запис значень в файл
         FileOutputStream out = null;
         try {
             out = new FileOutputStream("settings.properties");
@@ -105,9 +110,11 @@ public class LoginSettingDBController implements Initializable{
             informLabel.setText("Виникла помилка, зламайте руки тому, хто це робив");
         }
 
-
     }
 
+    /**
+     * Перевірка з'єднання з БД
+     */
     public void checkButtonOnAction(ActionEvent event){
         DatabaseConnection conn = new DatabaseConnection();
         if(conn.checkConnection()){
@@ -118,6 +125,9 @@ public class LoginSettingDBController implements Initializable{
 
     }
 
+    /**
+     * Повернення на початковий екран
+     */
     public void backButtonOnAction(ActionEvent event) throws IOException {
         FXApp m = new FXApp();
         m.changeScene("/makets/Login.fxml");

@@ -35,12 +35,18 @@ public class FXApp extends Application   {
         stg.show();
     }
 
+    /**
+     * Зміна головної сцени на ту, що в fxml файлі
+     */
     public void changeScene(String fxml) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource(fxml));
         stg.getScene().setRoot(root);
         stg.sizeToScene();
     }
 
+    /**
+     * Метод, для створення файлу налаштувань, та задання значень по замовченню
+     */
     public static void CheckSettingsFile() throws IOException {
         File file = new File("settings.properties");
         if(!file.exists()){
@@ -57,21 +63,7 @@ public class FXApp extends Application   {
         }
 
 
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

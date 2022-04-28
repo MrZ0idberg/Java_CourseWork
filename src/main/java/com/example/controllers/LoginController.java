@@ -33,7 +33,7 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordTextField;
 
-    /*
+    /**
      * Ініціалізація вікна для входу
      */
     @Override
@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
 
     }
 
-    /*
+    /**
      * Обробка події натискання на кнопку cancel і закриття програми
      */
     public void cancelButtonOnAction(ActionEvent event){
@@ -54,11 +54,12 @@ public class LoginController implements Initializable {
         stage.close();
     }
 
-    /*
+    /**
      * Обробка події настискання на кнопку login і перевірка введених даних
      */
     public void loginButtonOnAction(ActionEvent event) throws IOException {
 
+        //Перевірка текстових полів, на заповненість
         if(!usernameTextField.getText().isBlank() && !passwordTextField.getText().isBlank()){
             validateLogin();
         }else{
@@ -66,8 +67,8 @@ public class LoginController implements Initializable {
         }
     }
 
-    /*
-     * Перевірка комбінації логіну/паролю
+    /**
+     * Перевірка комбінації логіну/паролю та
      */
     public void validateLogin() throws IOException {
         FXApp m = new FXApp();
@@ -77,6 +78,7 @@ public class LoginController implements Initializable {
         String login = usernameTextField.getText();
         String password = passwordTextField.getText();
 
+        //Перевірка зв'язку з БД, якщо зв'язок є, викоання перевірки логіну/паролю
         if(!connDB.checkConnection()) {
             loginMassageLabel.setText("Відсутній зв'язок з ДП, перевірте налаштування");
         }else if (connDB.validateLoginDB(login, password)){
@@ -86,14 +88,12 @@ public class LoginController implements Initializable {
         }
     }
 
-    /*
+    /**
      * Обробка події настискання на кнопку налаштувань БД
      */
     public void settingDBButtonOnAction(ActionEvent event) throws IOException {
         FXApp m = new FXApp();
         m.changeScene("/makets/LoginSettingDB.fxml");
     }
-
-
 
 }
