@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="460.0" prefWidth="346.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.LoginController">
+   <children>
+      <Label layoutX="28.0" layoutY="209.0" text="Логін">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameTextField" layoutX="28.0" layoutY="230.0" prefHeight="35.0" prefWidth="290.0" promptText="Логін" />
+      <Label layoutX="30.0" layoutY="269.0" text="Пароль">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="294.0" prefHeight="35.0" prefWidth="290.0" promptText="Пароль" />
+      <Button fx:id="loginButton" layoutX="28.0" layoutY="380.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="290.0" text="Увійти" />
+      <Button fx:id="cancelButton" layoutX="28.0" layoutY="413.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="290.0" text="Скасувати" />
+      <Label fx:id="loginMassageLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="28.0" layoutY="343.0" prefHeight="21.0" prefWidth="290.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="logoImg" fitHeight="134.0" fitWidth="290.0" layoutX="28.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/logoImg.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="89.0" layoutY="14.0" mnemonicParsing="false" onAction="#settingDBButtonOnAction" text="Налаштування БД" />
+   </children>
+   <rotationAxis>
+      <Point3D />
+   </rotationAxis>
+</AnchorPane>

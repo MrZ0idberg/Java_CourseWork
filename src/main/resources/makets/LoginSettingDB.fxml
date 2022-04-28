@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="460.0" prefWidth="346.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.LoginSettingDBController">
+   <children>
+      <PasswordField fx:id="passField" layoutX="28.0" layoutY="105.0" prefHeight="35.0" prefWidth="290.0" promptText="Пароль БД" />
+      <Label layoutX="28.0" layoutY="28.0" prefHeight="21.0" prefWidth="88.0" text="Логін БД">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="loginDBTextField" layoutX="28.0" layoutY="49.0" prefHeight="35.0" prefWidth="290.0" promptText="Логін БД" />
+      <Label layoutX="29.0" layoutY="196.0" text="Назва БД">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="28.0" layoutY="347.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="25.0" prefWidth="290.0" text="Зберегти налаштування" />
+      <Button layoutX="28.0" layoutY="413.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="25.0" prefWidth="290.0" text="Повернутись " />
+      <Label layoutX="28.0" layoutY="84.0" prefHeight="21.0" prefWidth="88.0" text="Пароль БД">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="28.0" layoutY="380.0" mnemonicParsing="false" onAction="#checkButtonOnAction" prefHeight="25.0" prefWidth="290.0" text="Перевірити зв'язок з БД" />
+      <Label fx:id="informLabel" alignment="CENTER" layoutX="28.0" layoutY="259.0" maxWidth="290.0" prefHeight="82.0" prefWidth="290.0" wrapText="true" />
+      <Label layoutX="29.0" layoutY="140.0" text="Адреса БД">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameDBTextField" layoutX="28.0" layoutY="217.0" prefHeight="35.0" prefWidth="290.0" promptText="Назва БД" />
+      <TextField fx:id="addressDBTextField" layoutX="28.0" layoutY="161.0" prefHeight="35.0" prefWidth="290.0" promptText="Адреса БД" />
+   </children>
+</AnchorPane>
