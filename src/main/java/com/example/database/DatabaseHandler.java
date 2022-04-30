@@ -1,5 +1,6 @@
 package com.example.database;
 
+import javafx.scene.control.Alert;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -20,7 +21,7 @@ public class DatabaseHandler {
     }
 
     /**
-     * Метод для під'єднання до бази даних
+     * Считування налаштування та під'єднання до бази даних
      */
     private void getConnection(){
 
@@ -50,11 +51,54 @@ public class DatabaseHandler {
         }
     }
 
+    /**
+     * Перевірка з'єднання з БД
+     * @return true - зв'язок є; false - зв'язок відсутній
+     */
     public boolean checkConnection(){
         getConnection();
         return checkWork;
     }
 
+    /**
+     * Функція виконує запит SQL та повертає результат запиту
+     * @param query SQL запит
+     * @return результат запиту
+     */
+    public ResultSet execQuery(String query){
+        ResultSet result = null;
+        try{
+            stmt = conn.createStatement();
+            result = stmt.executeQuery(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return result;
+    }
+
+    /**
+     * Функція виконує запит SQL та повертає выдомості про завершення запиту
+     * @param query SQL запит
+     * @return true - запит виконано успішно;
+     * false - запит не виконано
+     */
+    public boolean execAction(String query){
+        try{
+            stmt = conn.createStatement();
+            stmt.executeQuery(query);
+            return true;
+        }catch (SQLException ex){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error Occured");
+            alert.setContentText("Error:" + ex.getMessage());
+            alert.showAndWait();
+
+            ex.printStackTrace();
+            ex.getCause();
+            return false;
+        }
+    }
 
     /**
      * Перевіряє, чи є данний користувач в системі
@@ -74,14 +118,13 @@ public class DatabaseHandler {
         boolean checkReaders = false;
 
         try{
-            Statement statement = conn.createStatement();
+            ResultSet queryResult = execQuery(verifyLoginWorkers);
 
-            ResultSet queryResult = statement.executeQuery(verifyLoginWorkers);
             while (queryResult.next()){
                 checkWorkers = queryResult.getBoolean(1);
             }
 
-            queryResult = statement.executeQuery(verifyLoginReaders);
+            queryResult = execQuery(verifyLoginReaders);
             while (queryResult.next()){
                 checkReaders = queryResult.getBoolean(1);
             }
@@ -92,6 +135,20 @@ public class DatabaseHandler {
         return checkWorkers || checkReaders;
     }
 
+    /**
+     * Внесення книжки в базу даних
+     * @param name назва книжки
+     * @param author автор книжки
+     * @param genre жанр книжки
+     * @param department відділ зберігання книги
+     * @return true - запит виконано успішно;
+     * false - запит не виконано
+     */
+    public boolean addBook (String name, String author, String genre, String department){
+        String query = "INSERT INTO books(name_book, writer, genre_id, department_id)\n" +
+                "VALUES (\""  + name +  "\", \"" + author + "\", \"" + genre + "\", \""  + department +"\");";
+        return execAction(query);
+    }
 
 
 }
