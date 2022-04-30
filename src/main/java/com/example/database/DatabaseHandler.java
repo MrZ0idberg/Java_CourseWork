@@ -7,16 +7,22 @@ import java.util.Properties;
 
 
 public class DatabaseHandler {
-    private Connection databaseLink;
+
+    private static  DatabaseHandler handler;
+
+    private static Connection conn = null;
+    private static Statement stmt = null;
 
     private boolean checkWork;
 
+    public DatabaseHandler(){
+        getConnection();
+    }
 
     /**
      * Метод для під'єднання до бази даних
-     * @return Повертає з'єднання класу Connection
      */
-    private Connection getConnection(){
+    private void getConnection(){
 
         Properties properties = new Properties();
 
@@ -35,18 +41,17 @@ public class DatabaseHandler {
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
+            conn = DriverManager.getConnection(url, databaseUser, databasePassword);
             checkWork = true;
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
             checkWork = false;
         }
-        return databaseLink;
     }
 
     public boolean checkConnection(){
-        Connection conn = this.getConnection();
+        getConnection();
         return checkWork;
     }
 
@@ -59,8 +64,6 @@ public class DatabaseHandler {
      * false - дані відсутні в БД
      */
     public boolean validateLoginDB(String login, String password){
-
-        Connection conn = this.getConnection();
 
         String verifyLoginWorkers = "SELECT COUNT(1) FROM workers\n" +
                 "WHERE login = '" + login + "' AND password = '" + password + "';";
