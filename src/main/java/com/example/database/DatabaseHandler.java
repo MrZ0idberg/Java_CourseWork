@@ -1,4 +1,4 @@
-package com.example;
+package com.example.database;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.Properties;
 
 
-public class DatabaseConnection {
+public class DatabaseHandler {
     private Connection databaseLink;
 
     private boolean checkWork;
@@ -28,7 +28,7 @@ public class DatabaseConnection {
         }
 
         String databaseName = properties.getProperty("db.name");
-        String databaseUser = properties.getProperty("db.login");;
+        String databaseUser = properties.getProperty("db.login");
         String databasePassword = properties.getProperty("db.password");
         String databaseAddress = properties.getProperty("db.address");
         String url = "jdbc:mysql://" + databaseAddress + "/" + databaseName;

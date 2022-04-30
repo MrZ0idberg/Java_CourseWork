@@ -1,6 +1,6 @@
 package com.example.controllers;
 
-import com.example.DatabaseConnection;
+import com.example.database.DatabaseHandler;
 import com.example.FXApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
     public void validateLogin() throws IOException {
         FXApp m = new FXApp();
 
-        DatabaseConnection connDB = new DatabaseConnection();
+        DatabaseHandler connDB = new DatabaseHandler();
 
         String login = usernameTextField.getText();
         String password = passwordTextField.getText();

@@ -1,6 +1,6 @@
 package com.example.controllers;
 
-import com.example.DatabaseConnection;
+import com.example.database.DatabaseHandler;
 import com.example.FXApp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -116,7 +116,7 @@ public class LoginSettingDBController implements Initializable{
      * Перевірка з'єднання з БД
      */
     public void checkButtonOnAction(ActionEvent event){
-        DatabaseConnection conn = new DatabaseConnection();
+        DatabaseHandler conn = new DatabaseHandler();
         if(conn.checkConnection()){
             informLabel.setText("Зв'язок з БД успішно встановлений");
         } else {
