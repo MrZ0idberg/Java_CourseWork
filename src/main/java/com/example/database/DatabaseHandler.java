@@ -86,7 +86,7 @@ public class DatabaseHandler {
     public boolean execAction(String query){
         try{
             stmt = conn.createStatement();
-            stmt.executeQuery(query);
+            stmt.execute(query);
             return true;
         }catch (SQLException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);

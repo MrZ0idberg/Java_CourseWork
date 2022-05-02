@@ -10,7 +10,7 @@ public class MainStageWorkersController {
     @FXML
     public void addBooksButton(ActionEvent event){
         FXApp m = new FXApp();
-        m.showModalWindow("/makets/LoginSettingDB.fxml", event);//TODO Лол, зробити посилання на фхмл файлик, котрий рево робить
+        m.showModalWindow("/makets/addBook.fxml", event);
     }
 
     @FXML
