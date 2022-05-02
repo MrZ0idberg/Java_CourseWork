@@ -59,6 +59,9 @@ public class FXApp extends Application   {
             stage.setTitle("Library Friend");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
+            File iconFile = new File("src/main/resources/icons/ProgramIcon.png");
+            Image icon = new Image(iconFile.toURI().toString());
+            stage.getIcons().add(icon);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
