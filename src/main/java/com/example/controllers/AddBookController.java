@@ -13,8 +13,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-public class addBookController implements Initializable{
+/**
+ * Клас-контроллер для вікна додавання книги
+ */
+public class AddBookController implements Initializable{
 
     @FXML
     private TextField id;
@@ -69,14 +71,12 @@ public class addBookController implements Initializable{
                 alert.showAndWait();
             }
 
-
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Заповніть всі поля");
             alert.showAndWait();
         }
-
     }
 
     /**
@@ -87,6 +87,5 @@ public class addBookController implements Initializable{
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.close();
     }
-
 
 }

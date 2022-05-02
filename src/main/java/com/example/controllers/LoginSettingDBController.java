@@ -18,7 +18,9 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-
+/**
+ * Клас-контроллер для вікна налаштування бази даних
+ */
 public class LoginSettingDBController implements Initializable{
 
     @FXML
@@ -109,7 +111,6 @@ public class LoginSettingDBController implements Initializable{
             e.printStackTrace();
             informLabel.setText("Виникла помилка, зламайте руки тому, хто це робив");
         }
-
     }
 
     /**
@@ -122,7 +123,6 @@ public class LoginSettingDBController implements Initializable{
         } else {
             informLabel.setText("Зв'язок з БД не встановлено, перевірте уведені дані");
         }
-
     }
 
     /**

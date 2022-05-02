@@ -6,17 +6,16 @@ import javafx.fxml.FXML;
 
 public class MainStageWorkersController {
 
-
     @FXML
     public void addBooksButton(ActionEvent event){
         FXApp m = new FXApp();
-        m.showModalWindow("/makets/addBook.fxml", event);
+        m.showModalWindow("/makets/AddBook.fxml", event);
     }
 
     @FXML
     public void showBooksButton(ActionEvent event){
         FXApp m = new FXApp();
-        m.showModalWindow("makets/ViewBooks.fxml", event);
+        m.showModalWindow("/makets/ViewBooks.fxml", event);
     }
 
 }
