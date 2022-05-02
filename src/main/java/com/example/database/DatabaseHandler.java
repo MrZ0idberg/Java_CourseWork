@@ -1,12 +1,17 @@
 package com.example.database;
 
+import com.example.models.Books;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-
+/**
+ * Клас для обробки всіх звернень до бази даних
+ */
 public class DatabaseHandler {
 
     private static  DatabaseHandler handler;
@@ -150,5 +155,41 @@ public class DatabaseHandler {
         return execAction(query);
     }
 
+    /**
+     * Виконання запиду до БД і заповнення списку інформацією про книжки
+     * @return список з інформацією, готовою до завантаження в таблицю
+     */
+    public ObservableList<Books> getBooks (){
+        String id, name, writer, genre, department;
+        boolean available;
+
+        ObservableList<Books> books = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT id_books, name_book, writer, name_genre, name_department, isAvailable FROM books\n" +
+                    "INNER JOIN book_genre\n" +
+                    "\tON books.genre_id = book_genre.id_genre\n" +
+                    "INNER JOIN books_department\n" +
+                    "\tON books.department_id = books_department.id_department\n" +
+                    ";";
+
+            ResultSet queryResult = execQuery(query);
+
+            while (queryResult.next()){
+                id = queryResult.getString("id_books");
+                name = queryResult.getString("name_book");
+                writer = queryResult.getString("writer");
+                genre = queryResult.getString("name_genre");
+                department = queryResult.getString("name_department");
+                available = queryResult.getBoolean("isAvailable");
+
+                books.add(new Books(id,name, writer, genre, department, available));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return books;
+    }
 
 }
