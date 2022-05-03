@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="865.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="865.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainStageWorkersController">
    <children>
       <BorderPane prefHeight="460.0" prefWidth="814.0">
          <top>
@@ -54,16 +54,16 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                            <image>
-                              <Image url="@../icons/solo%20people.png" />
+                              <Image url="@../icons/mainStageWorkers/soloPeople.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Додати книгу">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBooksButton" prefHeight="75.0" prefWidth="216.0" text="Додати книгу">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/solo%20book.png" />
+                              <Image url="@../icons/mainStageWorkers/soloBook.png" />
                            </image></ImageView>
                      </graphic>
                   </Button>
@@ -71,15 +71,15 @@
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/many%20people.png" />
+                              <Image url="@../icons/mainStageWorkers/manyPeople.png" />
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Список книг">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#showBooksButton" prefHeight="75.0" prefWidth="216.0" text="Список книг">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/many%20book.png" />
+                              <Image url="@../icons/mainStageWorkers/manyBook.png" />
                            </image></ImageView>
                      </graphic>
                   </Button>
@@ -87,7 +87,7 @@
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/шестерня.jpg" />
+                              <Image url="@../icons/mainStageWorkers/шестерня.jpg" />
                            </image></ImageView>
                      </graphic>
                   </Button>
