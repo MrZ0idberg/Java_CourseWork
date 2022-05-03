@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Клас-контроллер для вікна авторизації
+ */
 public class LoginController implements Initializable {
 
     @FXML
@@ -43,7 +46,6 @@ public class LoginController implements Initializable {
         File imgFile = new File("src/main/resources/icons/logoImg.jpg");
         Image img = new Image(imgFile.toURI().toString());
         logoImg.setImage(img);
-
     }
 
     /**
@@ -82,7 +84,7 @@ public class LoginController implements Initializable {
         if(!connDB.checkConnection()) {
             loginMassageLabel.setText("Відсутній зв'язок з ДП, перевірте налаштування");
         }else if (connDB.validateLoginDB(login, password)){
-            m.changeScene("/makets/MainStageForWorkers.fxml");
+            m.changeScene("/makets/MainStageWorkers.fxml");
         }else{
             loginMassageLabel.setText("Невірка комбінація логіну/паролю");
         }

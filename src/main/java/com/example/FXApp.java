@@ -1,10 +1,13 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -45,6 +48,30 @@ public class FXApp extends Application   {
     }
 
     /**
+     * Відображення модульного вікна
+     * @param fxml шлях до файлу fxml
+     * @param event об'єкт ActionEvent, котрий передається при обробки функції
+     */
+    public void showModalWindow(String fxml, ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            stage.setTitle("Library Friend");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            File iconFile = new File("src/main/resources/icons/ProgramIcon.png");
+            Image icon = new Image(iconFile.toURI().toString());
+            stage.getIcons().add(icon);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Метод, для створення файлу налаштувань, та задання значень по замовченню
      */
     public static void CheckSettingsFile() throws IOException {
@@ -61,8 +88,6 @@ public class FXApp extends Application   {
             FileOutputStream out = new FileOutputStream("settings.properties");
             properties.store(out, "Create file");
         }
-
-
     }
 
 
