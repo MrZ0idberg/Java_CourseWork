@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" prefHeight="446.0" prefWidth="564.0" stylesheets="@../css/AddBook.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AddBookController">
+<AnchorPane fx:id="rootPane" prefHeight="446.0" prefWidth="564.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AddBookController">
    <children>
       <VBox layoutY="7.0" prefHeight="440.0" prefWidth="564.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -64,7 +64,7 @@
             </TextField>
             <HBox prefHeight="74.0" prefWidth="544.0">
                <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addBook" prefHeight="64.0" prefWidth="190.0" stylesheets="@../css/Standard.css" text="Додати книгу">
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addBook" prefHeight="64.0" prefWidth="190.0" text="Додати книгу">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin></Button>
