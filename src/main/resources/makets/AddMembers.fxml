@@ -65,7 +65,7 @@
             </TextField>
             <HBox prefHeight="74.0" prefWidth="544.0">
                <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addMember" prefHeight="64.0" prefWidth="500.0" text="Додати книгу">
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addMember" prefHeight="64.0" prefWidth="500.0" text="Додати читача">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
