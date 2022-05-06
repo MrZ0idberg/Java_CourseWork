@@ -156,6 +156,22 @@ public class DatabaseHandler {
     }
 
     /**
+     * Внесення читача в базу даних
+     * @param login логін читача
+     * @param password пароль читача
+     * @param name ім'я читача
+     * @param surname прізвище читача
+     * @param phone_number номер читача
+     * @return true - запит виконано успішно;
+     * false - запит не виконано
+     */
+    public boolean addMember (String login, String password, String name, String surname, String phone_number){
+        String query = "INSERT INTO library_reader(login, password, name, last_name, phone_num)\n" +
+                "VALUES ('" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + phone_number + "')\n;";
+        return execAction(query);
+    }
+
+    /**
      * Виконання запиду до БД і заповнення списку інформацією про книжки
      * @return список з інформацією, готовою до завантаження в таблицю
      */

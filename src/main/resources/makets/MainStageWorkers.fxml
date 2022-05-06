@@ -47,7 +47,7 @@
          <right>
             <VBox prefHeight="435.0" prefWidth="181.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Додати працівника">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addMemberButton" prefHeight="75.0" prefWidth="216.0" text="Додати читача">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <cursor>
@@ -67,7 +67,7 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Список працівників">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Список читачів">
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
