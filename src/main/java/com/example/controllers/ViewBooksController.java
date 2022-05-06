@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Клас-контроллер для вікна перегляду книжок
+ * Клас-контролер для вікна перегляду книжок
  */
 public class ViewBooksController implements Initializable {
 
@@ -37,7 +37,7 @@ public class ViewBooksController implements Initializable {
     }
 
     /**
-     * Ініціалізація колонок, співставлення колонок до класу
+     * Ініціалізація колонок, зіставлення колонок з класом
      */
     private void initCol() {
 
@@ -50,7 +50,7 @@ public class ViewBooksController implements Initializable {
     }
 
     /**
-     * Завантаження данних з БД і їх завантаження у табличку у вигляді списку, котрий був сформаваний
+     * Завантаження даних з БД і їх завантаження у табличку у вигляді списку, котрий був сформаваний
      * У базі даних
      */
     private void loadData() {

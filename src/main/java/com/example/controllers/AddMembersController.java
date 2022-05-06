@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -13,21 +14,18 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Клас-контролер для вікна додавання книги
- */
-public class AddBookController implements Initializable{
+public class AddMembersController implements Initializable {
 
     @FXML
-    private TextField id;
+    private TextField login;
     @FXML
-    private TextField author;
+    private PasswordField password;
     @FXML
     private TextField name;
     @FXML
-    private TextField genre;
+    private TextField surname;
     @FXML
-    private TextField department;
+    private TextField phone_number;
 
     @FXML
     private Button saveButton;
@@ -45,24 +43,24 @@ public class AddBookController implements Initializable{
     }
 
     /**
-     *Додавання книги в БД
+     *Додавання читача в БД
      */
     @FXML
-    public void addBook(ActionEvent event){
-        String bookID = id.getText();
-        String bookAuthor = author.getText();
-        String bookName = name.getText();
-        String bookGenre = genre.getText();
-        String bookDepartment = department.getText();
+    public void addMember(ActionEvent event){
+        String memberLogin = login.getText();
+        String memberPassword = password.getText();
+        String memberName = name.getText();
+        String memberSurname = surname.getText();
+        String memberPhone_number = phone_number.getText();
 
-        boolean isEmptyTextField = bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()
-                || bookGenre.isEmpty() || bookDepartment.isEmpty();
+        boolean isEmptyTextField = memberLogin.isEmpty() || memberPassword.isEmpty() || memberName.isEmpty()
+                || memberSurname.isEmpty() || memberPhone_number.isEmpty();
 
         if(!isEmptyTextField){
-            if(databaseHandler.addBook(bookAuthor, bookName, bookGenre, bookDepartment)){
+            if(databaseHandler.addMember(memberLogin, memberPassword, memberName, memberSurname, memberPhone_number)){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
-                alert.setContentText("Книжку успішно додано до БД");
+                alert.setContentText("Читача успішно додано до БД");
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -78,6 +76,7 @@ public class AddBookController implements Initializable{
             alert.showAndWait();
         }
     }
+
 
     /**
      * Закриття вікна

@@ -1,6 +1,7 @@
 package com.example.database;
 
 import com.example.models.Books;
+import com.example.models.Members;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -26,7 +27,7 @@ public class DatabaseHandler {
     }
 
     /**
-     * Считування налаштування та під'єднання до бази даних
+     * Зчитування налаштування та під'єднання до бази даних
      */
     private void getConnection(){
 
@@ -95,7 +96,7 @@ public class DatabaseHandler {
             return true;
         }catch (SQLException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error Occured");
+            alert.setHeaderText("Error Occurred");
             alert.setContentText("Error:" + ex.getMessage());
             alert.showAndWait();
 
@@ -156,7 +157,23 @@ public class DatabaseHandler {
     }
 
     /**
-     * Виконання запиду до БД і заповнення списку інформацією про книжки
+     * Внесення читача в базу даних
+     * @param login логін читача
+     * @param password пароль читача
+     * @param name ім'я читача
+     * @param surname прізвище читача
+     * @param phone_number номер читача
+     * @return true - запит виконано успішно;
+     * false - запит не виконано
+     */
+    public boolean addMember (String login, String password, String name, String surname, String phone_number){
+        String query = "INSERT INTO library_reader(login, password, name, last_name, phone_num)\n" +
+                "VALUES ('" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + phone_number + "')\n;";
+        return execAction(query);
+    }
+
+    /**
+     * Виконання запиту до БД і заповнення списку інформацією про книжки
      * @return список з інформацією, готовою до завантаження в таблицю
      */
     public ObservableList<Books> getBooks (){
@@ -190,6 +207,37 @@ public class DatabaseHandler {
             e.getCause();
         }
         return books;
+    }
+
+    /**
+     * Виконання запиту до БД і заповнення списку інформацією про читачів
+     * @return список з інформацією, готовою до завантаження в таблицю
+     */
+    public ObservableList<Members> getMembers (){
+        String id, login, name, surname, phone_number;
+
+        ObservableList<Members> members = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT id_reading_ticket, login, name, last_name, phone_num FROM library_reader;";
+
+            ResultSet queryResult = execQuery(query);
+
+            while (queryResult.next()){
+                id = queryResult.getString("id_reading_ticket");
+                login = queryResult.getString("login");
+                name = queryResult.getString("name");
+                surname = queryResult.getString("last_name");
+                phone_number = queryResult.getString("phone_num");
+
+
+                members.add(new Members(id, login, name, surname, phone_number));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return members;
     }
 
 }

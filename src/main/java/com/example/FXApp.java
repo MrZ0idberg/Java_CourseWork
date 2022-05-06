@@ -48,9 +48,9 @@ public class FXApp extends Application   {
     }
 
     /**
-     * Відображення модульного вікна
+     * Показ модульного вікна
      * @param fxml шлях до файлу fxml
-     * @param event об'єкт ActionEvent, котрий передається при обробки функції
+     * @param event об'єкт ActionEvent, котрий передається при обробці функції
      */
     public void showModalWindow(String fxml, ActionEvent event) {
         try {
