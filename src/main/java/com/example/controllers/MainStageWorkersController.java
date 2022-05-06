@@ -24,5 +24,10 @@ public class MainStageWorkersController {
         m.showModalWindow("/makets/AddMembers.fxml", event);
     }
 
+    @FXML
+    public void showMembersButton(ActionEvent event){
+        FXApp m = new FXApp();
+        m.showModalWindow("/makets/ViewMembers.fxml", event);
+    }
 
 }

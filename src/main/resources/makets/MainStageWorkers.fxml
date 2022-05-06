@@ -67,7 +67,7 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="216.0" text="Список читачів">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#showMembersButton" prefHeight="75.0" prefWidth="216.0" text="Список читачів">
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>

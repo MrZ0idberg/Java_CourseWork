@@ -1,6 +1,7 @@
 package com.example.database;
 
 import com.example.models.Books;
+import com.example.models.Members;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -206,6 +207,37 @@ public class DatabaseHandler {
             e.getCause();
         }
         return books;
+    }
+
+    /**
+     * Виконання запиту до БД і заповнення списку інформацією про читачів
+     * @return список з інформацією, готовою до завантаження в таблицю
+     */
+    public ObservableList<Members> getMembers (){
+        String id, login, name, surname, phone_number;
+
+        ObservableList<Members> members = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT id_reading_ticket, login, name, last_name, phone_num FROM library_reader;";
+
+            ResultSet queryResult = execQuery(query);
+
+            while (queryResult.next()){
+                id = queryResult.getString("id_reading_ticket");
+                login = queryResult.getString("login");
+                name = queryResult.getString("name");
+                surname = queryResult.getString("last_name");
+                phone_number = queryResult.getString("phone_num");
+
+
+                members.add(new Members(id, login, name, surname, phone_number));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return members;
     }
 
 }
