@@ -34,7 +34,7 @@ public class ViewMembersController implements Initializable{
     }
 
     /**
-     * Ініціалізація колонок, співставлення колонок до класу
+     * Ініціалізація колонок, зіставлення колонок з класом
      */
     private void initCol() {
 

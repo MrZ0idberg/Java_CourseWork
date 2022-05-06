@@ -27,7 +27,7 @@ public class DatabaseHandler {
     }
 
     /**
-     * Считування налаштування та під'єднання до бази даних
+     * Зчитування налаштування та під'єднання до бази даних
      */
     private void getConnection(){
 
@@ -96,7 +96,7 @@ public class DatabaseHandler {
             return true;
         }catch (SQLException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error Occured");
+            alert.setHeaderText("Error Occurred");
             alert.setContentText("Error:" + ex.getMessage());
             alert.showAndWait();
 
@@ -173,7 +173,7 @@ public class DatabaseHandler {
     }
 
     /**
-     * Виконання запиду до БД і заповнення списку інформацією про книжки
+     * Виконання запиту до БД і заповнення списку інформацією про книжки
      * @return список з інформацією, готовою до завантаження в таблицю
      */
     public ObservableList<Books> getBooks (){

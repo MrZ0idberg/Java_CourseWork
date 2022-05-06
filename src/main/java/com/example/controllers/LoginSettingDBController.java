@@ -19,7 +19,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Клас-контроллер для вікна налаштування бази даних
+ * Клас-контролер для вікна налаштування бази даних
  */
 public class LoginSettingDBController implements Initializable{
 
@@ -71,7 +71,7 @@ public class LoginSettingDBController implements Initializable{
 
     /**
      * Обробка події натискання на кнопку збереження
-     * Збеження данних в файлі конфігурації
+     * даних у файлі конфігурації
      */
     public void saveButtonOnAction(ActionEvent event){
         String login;

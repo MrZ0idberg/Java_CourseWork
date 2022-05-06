@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Клас-контроллер для вікна авторизації
+ * Клас-контролер для вікна авторизації
  */
 public class LoginController implements Initializable {
 
@@ -42,7 +42,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        //Считування зображення з файлу і запис його у ImageView
+        //Зчитування зображення з файлу і запис його в ImageView
         File imgFile = new File("src/main/resources/icons/logoImg.jpg");
         Image img = new Image(imgFile.toURI().toString());
         logoImg.setImage(img);
@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Обробка події настискання на кнопку login і перевірка введених даних
+     * Обробка події натискання на кнопку login і перевірка введених даних
      */
     public void loginButtonOnAction(ActionEvent event) throws IOException {
 
@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Перевірка комбінації логіну/паролю та
+     * Перевірка комбінації логін/пароль та
      */
     public void validateLogin() throws IOException {
         FXApp m = new FXApp();
@@ -80,18 +80,18 @@ public class LoginController implements Initializable {
         String login = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        //Перевірка зв'язку з БД, якщо зв'язок є, викоання перевірки логіну/паролю
+        //Перевірка зв'язку з БД, якщо зв'язок є, виконання перевірки логін/паролю
         if(!connDB.checkConnection()) {
             loginMassageLabel.setText("Відсутній зв'язок з ДП, перевірте налаштування");
         }else if (connDB.validateLoginDB(login, password)){
             m.changeScene("/makets/MainStageWorkers.fxml");
         }else{
-            loginMassageLabel.setText("Невірка комбінація логіну/паролю");
+            loginMassageLabel.setText("Невірна комбінація логіну/паролю");
         }
     }
 
     /**
-     * Обробка події настискання на кнопку налаштувань БД
+     * Обробка події натискання на кнопку налаштувань БД
      */
     public void settingDBButtonOnAction(ActionEvent event) throws IOException {
         FXApp m = new FXApp();

@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Клас-контроллер для вікна додавання книги
+ * Клас-контролер для вікна додавання книги
  */
 public class AddBookController implements Initializable{
 
