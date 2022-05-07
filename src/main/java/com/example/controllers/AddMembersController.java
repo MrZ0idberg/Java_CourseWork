@@ -39,7 +39,7 @@ public class AddMembersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        databaseHandler = new DatabaseHandler();
+        databaseHandler = DatabaseHandler.getInstance();
     }
 
     /**

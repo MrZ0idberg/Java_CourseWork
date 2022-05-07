@@ -55,7 +55,7 @@ public class ViewBooksController implements Initializable {
      */
     private void loadData() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
         TableView.getItems().setAll(databaseHandler.getBooks());
     }
 }

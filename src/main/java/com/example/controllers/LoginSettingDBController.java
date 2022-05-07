@@ -117,7 +117,7 @@ public class LoginSettingDBController implements Initializable{
      * Перевірка з'єднання з БД
      */
     public void checkButtonOnAction(ActionEvent event){
-        DatabaseHandler conn = new DatabaseHandler();
+        DatabaseHandler conn = DatabaseHandler.getInstance();
         if(conn.checkConnection()){
             informLabel.setText("Зв'язок з БД успішно встановлений");
         } else {

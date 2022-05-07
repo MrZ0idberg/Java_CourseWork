@@ -51,7 +51,7 @@ public class ViewMembersController implements Initializable{
      */
     private void loadData() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
         TableView.getItems().setAll(databaseHandler.getMembers());
     }
 

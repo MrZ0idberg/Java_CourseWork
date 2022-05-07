@@ -15,15 +15,22 @@ import java.util.Properties;
  */
 public class DatabaseHandler {
 
-    private static  DatabaseHandler handler;
+    private static  DatabaseHandler handler = null;
 
     private static Connection conn = null;
     private static Statement stmt = null;
 
     private boolean checkWork;
 
-    public DatabaseHandler(){
+    private DatabaseHandler(){
         getConnection();
+    }
+
+    public static  DatabaseHandler getInstance(){
+        if(handler == null){
+            handler = new DatabaseHandler();
+        }
+        return handler;
     }
 
     /**
