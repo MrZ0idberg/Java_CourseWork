@@ -7,13 +7,14 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Books {
 
-    private final SimpleStringProperty id;
-    private final SimpleStringProperty name;
-    private final SimpleStringProperty author;
-    private final SimpleStringProperty genre;
-    private final SimpleStringProperty department;
-    private final SimpleStringProperty available;
+    private  SimpleStringProperty id;
+    private  SimpleStringProperty name;
+    private  SimpleStringProperty author;
+    private  SimpleStringProperty genre;
+    private  SimpleStringProperty department;
+    private  SimpleStringProperty available;
 
+    public Books(){}
 
     public Books(String id,String name,String author,String genre,String department,Boolean available){
 
@@ -76,5 +77,21 @@ public class Books {
 
     public SimpleStringProperty availableProperty() {
         return available;
+    }
+
+    public void setName(String name) {
+        this.name = new SimpleStringProperty(name);
+    }
+
+    public void setAuthor(String author) {
+        this.author = new SimpleStringProperty(author);
+    }
+
+    public void setAvailable(Boolean available) {
+        if (available) {
+            this.available = new SimpleStringProperty("В наявності");
+        } else {
+            this.available = new SimpleStringProperty("Відсутня");
+        }
     }
 }

@@ -247,4 +247,47 @@ public class DatabaseHandler {
         return members;
     }
 
+    /**
+     * Пошук інформації про книжку по ID, якщо ID відсутнє, виводить повідомлення про це
+     * @param id ID книги
+     * @return об'єкт з потрібною інформацією
+     */
+    public Books searchBookInfo(String id){
+
+        Books books = new Books();
+
+        try {
+            String query = "SELECT count(1) FROM books\n" +
+                    "WHERE id_books = " + id +";";
+            ResultSet queryResult = execQuery(query);
+
+            boolean available = false;
+
+            while (queryResult.next()){
+                available = queryResult.getBoolean(1);
+            }
+
+            if (available){
+                query = "SELECT name_book, writer, isAvailable FROM books\n" +
+                        "WHERE id_books = " + id + "\n;";
+
+                queryResult = execQuery(query);
+
+                while (queryResult.next()) {
+                    books.setName(queryResult.getString("name_book"));
+                    books.setAuthor(queryResult.getString("writer"));
+                    books.setAvailable(queryResult.getBoolean("isAvailable"));
+                }
+            }else {
+                books.setName("Книжку не знайдено");
+                books.setAuthor("Перевірте ID");
+                books.setAvailable(false);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return books;
+    }
+
 }
