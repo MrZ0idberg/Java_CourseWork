@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
@@ -147,6 +148,60 @@ public class DatabaseHandler {
             e.printStackTrace();
             e.getCause();
         }
+
+        /*
+         * Зберігання даних про те, хто авторизувався у системі
+         */
+        Properties properties = new Properties();
+
+        try {
+            FileInputStream in = new FileInputStream("settings.properties");
+            properties.load(in);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String id = "Not Set";
+        String post = "Not Set";
+        String query;
+
+        try {
+            if (checkWorkers) {
+                query = "SELECT id_workers, post_id FROM workers\n" +
+                        "WHERE login = '" + login + "';";
+                queryResult = execQuery(query);
+                while (queryResult.next()) {
+                    id = queryResult.getString("id_workers");
+                    post = queryResult.getString("post_id");
+                }
+            } else {
+                query = "SELECT id_reading_ticket FROM library_reader\n" +
+                        "WHERE login = '" + login + "';";
+                queryResult = execQuery(query);
+                while (queryResult.next()) {
+                    id = queryResult.getString("id_reading_ticket");
+                    post = "Reader";
+                }
+            }
+
+            //Запис значень, в об'єкт конфігурації
+            properties.setProperty("system.userLogin",login);
+            properties.setProperty("system.userID",id);
+            properties.setProperty("system.userPost",post);
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        //Запис значень в файл
+        try {
+            FileOutputStream out = new FileOutputStream("settings.properties");
+            properties.store(out, "Update");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return checkWorkers || checkReaders;
     }
 
