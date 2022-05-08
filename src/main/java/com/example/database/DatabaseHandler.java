@@ -130,8 +130,10 @@ public class DatabaseHandler {
         boolean checkWorkers = false;
         boolean checkReaders = false;
 
+        ResultSet queryResult;
+
         try{
-            ResultSet queryResult = execQuery(verifyLoginWorkers);
+             queryResult = execQuery(verifyLoginWorkers);
 
             while (queryResult.next()){
                 checkWorkers = queryResult.getBoolean(1);
@@ -146,6 +148,42 @@ public class DatabaseHandler {
             e.getCause();
         }
         return checkWorkers || checkReaders;
+    }
+
+    /**
+     * Перевірка наявності користувача в системі
+     * @param login логін користувача
+     * @return true - дані є в БД,
+     * false - дані відсутні в БД
+     */
+    public boolean checkAvailableUser(String login){
+
+        String verifyLoginWorkers = "SELECT COUNT(1) FROM workers\n" +
+                "WHERE login = '" + login + "';";
+        String verifyLoginReaders = "SELECT COUNT(1) FROM library_reader\n" +
+                "WHERE login = '" + login + "';";
+        boolean checkWorkers = false;
+        boolean checkReaders = false;
+
+        ResultSet queryResult;
+
+        try{
+            queryResult = execQuery(verifyLoginWorkers);
+
+            while (queryResult.next()){
+                checkWorkers = queryResult.getBoolean(1);
+            }
+
+            queryResult = execQuery(verifyLoginReaders);
+            while (queryResult.next()){
+                checkReaders = queryResult.getBoolean(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return checkWorkers || checkReaders;
+
     }
 
     /**
