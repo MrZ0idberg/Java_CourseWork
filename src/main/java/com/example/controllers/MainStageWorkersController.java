@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.FXApp;
 import com.example.database.DatabaseHandler;
 import com.example.models.Books;
+import com.example.models.Members;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,7 +62,7 @@ public class MainStageWorkersController implements Initializable {
     }
 
     /**
-     *Завантаження даних з БД по ID
+     * Завантаження даних про книгу з БД по ID
      */
     @FXML
     public void loadBookInfo(ActionEvent event){
@@ -69,16 +70,22 @@ public class MainStageWorkersController implements Initializable {
         String id = bookIdInfo.getText();
         Books books = handler.searchBookInfo(id);
 
-        System.out.println(books.getName());
-
         nameBook.setText(books.getName());
         authorName.setText(books.getAuthor());
         bookAvailable.setText(books.isAvailable());
     }
 
+    /**
+     * Завантаження даних про читача з БД по ID
+     */
     @FXML
     public void loadMemberInfo(ActionEvent event){
 
+        String memberId = memberIdInfo.getText();
+        Members members = handler.searchMemberInfo(memberId);
+
+        memberInfo.setText(members.getName() + " " + members.getSurname());
+        phoneNum.setText(members.getPhoneNumber());
     }
 
 }

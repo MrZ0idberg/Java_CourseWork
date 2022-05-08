@@ -8,10 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public abstract class Person {
 
-    private final SimpleStringProperty login;
-    private final SimpleStringProperty name;
-    private final SimpleStringProperty surname;
-    private final SimpleStringProperty phoneNumber;
+    private SimpleStringProperty login;
+    private SimpleStringProperty name;
+    private SimpleStringProperty surname;
+    private SimpleStringProperty phoneNumber;
+
+    protected Person (){}
 
     protected Person (String login, String name, String surname, String phone_number){
 
@@ -51,5 +53,17 @@ public abstract class Person {
 
     public SimpleStringProperty phoneNumberProperty() {
         return phoneNumber;
+    }
+
+    public void setName(String name) {
+        this.name = new SimpleStringProperty(name);;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = new SimpleStringProperty(surname);
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
     }
 }

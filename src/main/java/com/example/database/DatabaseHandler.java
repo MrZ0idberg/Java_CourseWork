@@ -290,4 +290,50 @@ public class DatabaseHandler {
         return books;
     }
 
+    /**
+     * Пошук інформації про читача по ID, якщо ID відсутнє, виводить повідомлення про це
+     * @param id ID читача
+     * @return об'єкт з потрібною інформацією
+     */
+    public Members searchMemberInfo(String id){
+
+        Members members = new Members();
+
+        try {
+
+            String query = "SELECT count(1) FROM library_reader\n" +
+                    "WHERE id_reading_ticket = " + id + ";";
+            ResultSet queryResult = execQuery(query);
+
+            boolean available = false;
+
+            while (queryResult.next()){
+                available = queryResult.getBoolean(1);
+            }
+
+            if (available){
+                query = "SELECT name, last_name, phone_num FROM library_reader\n" +
+                        "WHERE id_reading_ticket = " + id + ";";
+
+                queryResult = execQuery(query);
+
+                while (queryResult.next()) {
+                    members.setName(queryResult.getString("name"));
+                    members.setSurname(queryResult.getString("last_name"));
+                    members.setPhoneNumber(queryResult.getString("phone_num"));
+                }
+            }else {
+                members.setName("Читача не ");
+                members.setSurname("знайдено");
+                members.setPhoneNumber("Перевірте ID");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return members;
+    }
+
 }
