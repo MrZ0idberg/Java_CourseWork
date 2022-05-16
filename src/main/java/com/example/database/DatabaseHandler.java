@@ -2,13 +2,18 @@ package com.example.database;
 
 import com.example.models.Books;
 import com.example.models.Members;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.sql.*;
+
+import java.time.LocalDate;
 import java.util.Properties;
 
 /**
@@ -429,4 +434,37 @@ public class DatabaseHandler {
         return members;
     }
 
+    /**
+     * Видача книги, запис в БД
+     * ІД книги та читача передаються в параметрах, ІД працівника з файлу параметрів зчитується, а дата береться поточна
+     * @param bookID ІД книги
+     * @param memberID ІД читача
+     * @return true - виконання успішне,
+     * false - помилка при виконанні
+     */
+    public boolean issueBook(String bookID, String memberID){
+
+        //Зчитуємо ID користувача з файлу налаштувань
+        Properties properties = new Properties();
+        try {
+            FileInputStream in = new FileInputStream("settings.properties");
+            properties.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String workerID = properties.getProperty("system.userID");
+
+        //Отримання поточної дати
+        LocalDate date = LocalDate.now();
+        String dateOut = date.toString();
+
+        //Виконання запиту до БД
+        String insert = "INSERT INTO accounting_books(books_id, library_reader_id, book_was_taken, date_out, gave_worker_id)\n" +
+                "VALUES ('" + bookID + "', '" + memberID + "', '" + "1" + "', '" + dateOut + "', '" + workerID + "');";
+        String update = "UPDATE books\n" +
+                "SET isAvailable = 0\n" +
+                "WHERE id_books = " + bookID +";";
+
+        return execAction(insert) && execAction(update);
+    }
 }
