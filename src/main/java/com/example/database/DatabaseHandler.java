@@ -348,7 +348,7 @@ public class DatabaseHandler {
     /**
      * Пошук інформації про книжку по ID, якщо ID відсутнє, виводить повідомлення про це
      * @param id ID книги
-     * @return об'єкт з потрібною інформацією
+     * @return об'єкт з назвою, автором і наявністю
      */
     public Books searchBookInfo(String id){
 
@@ -467,4 +467,84 @@ public class DatabaseHandler {
 
         return execAction(insert) && execAction(update);
     }
+
+    /**
+     * Пошук інформації про книгу, котра пов'язана з обліком
+     * @param bookID ID книги
+     * @return Лист з інформацією для виводу
+     */
+    public ObservableList<String> loadBookAndMemberInfo(String bookID){
+
+        ObservableList<String> info = FXCollections.observableArrayList();
+
+        String query;
+        ResultSet queryResult;
+
+        String recordID = null;
+        String dateOut = null;
+        String memberName = null;
+        String memberLastName = null;
+        String memberPhone = null;
+        String workerName = null;
+        String workerLastName = null;
+
+        try {
+
+            /*
+             * Пошук ID запису, якщо книга видана, і вона ще не повернена, то це наш клієнт
+             */
+            query = "SELECT id_accounting_books FROM accounting_books\n" +
+                "WHERE books_id = " + bookID + " \n" +
+                "AND accounting_books.return = 0;";
+            queryResult = execQuery(query);
+            while (queryResult.next()) {
+                recordID = queryResult.getString("id_accounting_books");
+            }
+
+            /*
+             * Пошук інформації по запису ім'я і прізвище читача, коли видано, ким видано
+             */
+            query = "SELECT accounting_books.date_out, library_reader.name, library_reader.last_name,\n" +
+                    "library_reader.phone_num, workers.name, workers.last_name \n" +
+                    "FROM accounting_books\n" +
+                    "INNER JOIN library_reader\n" +
+                    "\tON accounting_books.library_reader_id = library_reader.id_reading_ticket\n" +
+                    "INNER JOIN workers\n" +
+                    "\tON accounting_books.gave_worker_id = workers.id_workers\n" +
+                    "WHERE id_accounting_books = " + recordID + ";";
+            queryResult = execQuery(query);
+            while (queryResult.next()) {
+                dateOut = queryResult.getString("accounting_books.date_out");
+                memberName = queryResult.getString("library_reader.name");
+                memberLastName = queryResult.getString("library_reader.last_name");
+                memberPhone = queryResult.getString("library_reader.phone_num");
+                workerName = queryResult.getString("workers.name");
+                workerLastName = queryResult.getString("workers.last_name");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        //Пошук інформації про книгу
+        Books book = searchBookInfo(bookID);
+
+        /*
+         * Запис даних в список та його повернення
+         */
+        info.add("Номер запису: " + recordID);
+        info.add("Дата видачі: " + dateOut);
+        info.add("ID книги: " + bookID);
+        info.add("Автор книги: " + book.getAuthor());
+        info.add("Назва книги: " + book.getName());
+        info.add("Ім'я та прізвище читача: " + memberName + " " + memberLastName);
+        info.add("Номер телефону читача: " + memberPhone);
+        info.add("Ім'я та прізвище працівника, котрий видав книгу: " + workerName + " " + workerLastName);
+
+        return info;
+    }
+
+
+
+
 }

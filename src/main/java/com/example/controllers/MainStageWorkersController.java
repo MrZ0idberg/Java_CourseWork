@@ -4,11 +4,14 @@ import com.example.FXApp;
 import com.example.database.DatabaseHandler;
 import com.example.models.Books;
 import com.example.models.Members;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -33,6 +36,11 @@ public class MainStageWorkersController implements Initializable {
     private TextField bookIdInfo;
     @FXML
     private TextField memberIdInfo;
+    @FXML
+    private TextField bookIdSecondTAB;
+
+    @FXML
+    private ListView<String> listBookAndMember;
 
     private FXApp m;
     private DatabaseHandler handler;
@@ -150,5 +158,21 @@ public class MainStageWorkersController implements Initializable {
             }
         }
     }
+
+    /**
+     * Завантаження даних про книгу і про користувача, у кого вона
+     */
+    @FXML
+    public void loadBookInfoAndMember(){
+
+        String bookID = bookIdSecondTAB.getText();
+
+        ObservableList<String> info = handler.loadBookAndMemberInfo(bookID);
+
+        listBookAndMember.getItems().setAll(info);
+    }
+
+
+
 
 }
