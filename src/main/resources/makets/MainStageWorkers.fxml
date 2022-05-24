@@ -45,9 +45,9 @@
             </MenuBar>
          </top>
          <right>
-            <VBox prefHeight="435.0" prefWidth="181.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="435.0" prefWidth="181.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addMemberButton" prefHeight="75.0" prefWidth="216.0" text="Додати читача">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addMemberButton" prefHeight="75.0" prefWidth="216.0" text="Додати читача" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <cursor>
@@ -59,7 +59,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBooksButton" prefHeight="75.0" prefWidth="216.0" text="Додати книгу">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBooksButton" prefHeight="75.0" prefWidth="216.0" text="Додати книгу" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -67,7 +67,7 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#showMembersButton" prefHeight="75.0" prefWidth="216.0" text="Список читачів">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#showMembersButton" prefHeight="75.0" prefWidth="216.0" text="Список читачів" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -75,7 +75,7 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#showBooksButton" prefHeight="75.0" prefWidth="216.0" text="Список книг">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#showBooksButton" prefHeight="75.0" prefWidth="216.0" text="Список книг" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,7 +83,7 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="181.0" text="Налаштування">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="181.0" text="Налаштування" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -101,60 +101,77 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="383.0" prefWidth="667.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox prefHeight="396.0" prefWidth="663.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="160.0" prefWidth="667.0">
+                                    <HBox id="HBoxMainStage" fx:id="bookInfo" alignment="CENTER" prefHeight="160.0" prefWidth="667.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField alignment="CENTER" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" promptText="Введіть Id книги">
+                                          <TextField fx:id="bookIdInfo" alignment="CENTER" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadBookInfo" promptText="Введіть ID книги">
                                              <opaqueInsets>
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                              </opaqueInsets>
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
                                           </TextField>
-                                          <VBox alignment="CENTER" prefHeight="66.0" prefWidth="468.0">
+                                          <VBox alignment="CENTER" prefHeight="127.0" prefWidth="420.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Назва книги" textAlignment="CENTER" wrappingWidth="470.154296875">
+                                                <Text id="textMeinStage" fx:id="nameBook" strokeType="OUTSIDE" strokeWidth="0.0" text="Назва книги" textAlignment="CENTER" wrappingWidth="350.0" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                                    </VBox.margin>
                                                 </Text>
-                                                <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Автор книги" textAlignment="CENTER" wrappingWidth="470.154296875">
+                                                <Text id="textMeinStage" fx:id="authorName" layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Автор книги" textAlignment="CENTER" wrappingWidth="350.0" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
-                                                      <Insets />
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <Text id="textMeinStage" fx:id="bookAvailable" strokeType="OUTSIDE" strokeWidth="0.0" text="Наявність" textAlignment="CENTER" wrappingWidth="350.0">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                                    </VBox.margin>
                                                 </Text>
                                              </children>
                                           </VBox>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="155.0" prefWidth="667.0">
+                                    <HBox id="HBoxMainStage" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="155.0" prefWidth="667.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField alignment="CENTER" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="181.0" promptText="Введіть Id працівника">
+                                          <TextField fx:id="memberIdInfo" alignment="CENTER" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadMemberInfo" promptText="Введіть ID читача">
                                              <opaqueInsets>
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                              </opaqueInsets>
                                              <font>
                                                 <Font size="11.0" />
                                              </font>
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
                                           </TextField>
-                                          <VBox alignment="CENTER" prefHeight="146.0" prefWidth="34.0">
+                                          <VBox alignment="CENTER" prefHeight="122.0" prefWidth="420.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ім'я працівника" textAlignment="CENTER" wrappingWidth="470.154296875">
+                                                <Text id="textMeinStage" fx:id="memberInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Ім'я і прізвище читача" textAlignment="CENTER" wrappingWidth="350.0" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                    </VBox.margin>
                                                 </Text>
-                                                <Text layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контакти" textAlignment="CENTER" wrappingWidth="470.154296875">
+                                                <Text id="textMeinStage" fx:id="phoneNum" layoutX="10.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Номер телефону" textAlignment="CENTER" wrappingWidth="350.0" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
-                                                      <Insets />
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                    </VBox.margin>
                                                 </Text>
                                              </children>
                                           </VBox>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text=" Випуск" />
+                                          <Button mnemonicParsing="false" onAction="#issueBook" prefHeight="33.0" prefWidth="113.0" text=" Випуск" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -169,10 +186,10 @@
                            <children>
                               <BorderPane layoutX="190.0" layoutY="53.0" prefHeight="383.0" prefWidth="667.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <top>
-                                    <TextField alignment="CENTER" prefHeight="25.0" prefWidth="416.0" promptText="Введіть Id книги" BorderPane.alignment="CENTER" />
+                                    <TextField fx:id="bookIdSecondTAB" alignment="CENTER" onAction="#loadBookInfoAndMember" prefHeight="25.0" prefWidth="416.0" promptText="Введіть Id книги" BorderPane.alignment="CENTER" />
                                  </top>
                                  <center>
-                                    <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                    <ListView fx:id="listBookAndMember" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <opaqueInsets>
                                           <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                        </opaqueInsets>
@@ -181,8 +198,7 @@
                                  <bottom>
                                     <HBox alignment="CENTER" prefHeight="65.0" prefWidth="667.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="121.0" text="Оновити" />
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="123.0" text="Подати" />
+                                          <Button mnemonicParsing="false" onAction="#returnBookButton" prefHeight="38.0" prefWidth="214.0" text="Повернути книгу" />
                                        </children>
                                     </HBox>
                                  </bottom>

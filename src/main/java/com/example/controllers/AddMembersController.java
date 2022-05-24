@@ -39,7 +39,7 @@ public class AddMembersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        databaseHandler = new DatabaseHandler();
+        databaseHandler = DatabaseHandler.getInstance();
     }
 
     /**
@@ -56,19 +56,28 @@ public class AddMembersController implements Initializable {
         boolean isEmptyTextField = memberLogin.isEmpty() || memberPassword.isEmpty() || memberName.isEmpty()
                 || memberSurname.isEmpty() || memberPhone_number.isEmpty();
 
+        //Якщо поля не пусті, то продовжуємо, інакше повідомляємо про це користувача
         if(!isEmptyTextField){
-            if(databaseHandler.addMember(memberLogin, memberPassword, memberName, memberSurname, memberPhone_number)){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Читача успішно додано до БД");
-                alert.showAndWait();
+            //Якщо користувача немає в системі, продовжуємо, інакше повідомляємо про це
+            if(!databaseHandler.checkAvailableUser(memberLogin)) {
+                //Якщо додавання успішне, повідомляємо, інакше повідомляємо про помилку
+                if (databaseHandler.addMember(memberLogin, memberPassword, memberName, memberSurname, memberPhone_number)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Читача успішно додано до БД");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Помилка при передачі запиту до БД");
+                    alert.showAndWait();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
-                alert.setContentText("Помилка при передачі запиту до БД");
+                alert.setContentText("Користувач з таким логіном присутній у системі");
                 alert.showAndWait();
             }
-
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -76,7 +85,6 @@ public class AddMembersController implements Initializable {
             alert.showAndWait();
         }
     }
-
 
     /**
      * Закриття вікна

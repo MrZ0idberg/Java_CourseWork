@@ -51,13 +51,15 @@ public class FXApp extends Application   {
      * Показ модульного вікна
      * @param fxml шлях до файлу fxml
      * @param event об'єкт ActionEvent, котрий передається при обробці функції
+     * @param resizable true - розмір вікна змінний
+     *                  false - розмір вікна незмінний
      */
-    public void showModalWindow(String fxml, ActionEvent event) {
+    public void showModalWindow(String fxml, ActionEvent event, boolean resizable) {
         try {
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource(fxml));
             stage.setTitle("Library Friend");
-            stage.setResizable(false);
+            stage.setResizable(resizable);
             stage.setScene(new Scene(root));
             File iconFile = new File("src/main/resources/icons/ProgramIcon.png");
             Image icon = new Image(iconFile.toURI().toString());

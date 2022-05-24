@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
     public void validateLogin() throws IOException {
         FXApp m = new FXApp();
 
-        DatabaseHandler connDB = new DatabaseHandler();
+        DatabaseHandler connDB = DatabaseHandler.getInstance();
 
         String login = usernameTextField.getText();
         String password = passwordTextField.getText();

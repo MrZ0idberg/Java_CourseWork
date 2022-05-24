@@ -99,6 +99,18 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+/* Для головного вікна робітників */
+#HBoxMainStage {
+    -fx-background-color: derive(#e3e3e5,20%);
+}
+
+#textMeinStage {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 0.6;
+}
+
 /*
  * Push Button в стиле Metro
  * Автор: Pedro Duque Vieira

@@ -7,7 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Members extends Person{
 
-    private final SimpleStringProperty idReadingTicket;
+    private SimpleStringProperty idReadingTicket;
+
+    public Members(){
+        super();
+    }
 
     public Members(String idReadingTicket, String login, String name, String surname, String phone_number ) {
         super(login, name, surname, phone_number);

@@ -1,11 +1,9 @@
 package com.example.controllers;
 
 import com.example.database.DatabaseHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -18,8 +16,7 @@ import java.util.ResourceBundle;
  */
 public class AddBookController implements Initializable{
 
-    @FXML
-    private TextField id;
+
     @FXML
     private TextField author;
     @FXML
@@ -30,36 +27,30 @@ public class AddBookController implements Initializable{
     private TextField department;
 
     @FXML
-    private Button saveButton;
-    @FXML
-    private Button cancelButton;
-
-    @FXML
     private AnchorPane rootPane;
 
     DatabaseHandler databaseHandler;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        databaseHandler = new DatabaseHandler();
+        databaseHandler = DatabaseHandler.getInstance();
     }
 
     /**
      *Додавання книги в БД
      */
     @FXML
-    public void addBook(ActionEvent event){
-        String bookID = id.getText();
+    public void addBook(){
         String bookAuthor = author.getText();
         String bookName = name.getText();
         String bookGenre = genre.getText();
         String bookDepartment = department.getText();
 
-        boolean isEmptyTextField = bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()
+        boolean isEmptyTextField = bookAuthor.isEmpty() || bookName.isEmpty()
                 || bookGenre.isEmpty() || bookDepartment.isEmpty();
 
         if(!isEmptyTextField){
-            if(databaseHandler.addBook(bookAuthor, bookName, bookGenre, bookDepartment)){
+            if(databaseHandler.addBook(bookName, bookAuthor, bookGenre, bookDepartment)){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
                 alert.setContentText("Книжку успішно додано до БД");
@@ -83,7 +74,7 @@ public class AddBookController implements Initializable{
      * Закриття вікна
      */
     @FXML
-    public void cancel(ActionEvent event){
+    public void cancel(){
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.close();
     }
