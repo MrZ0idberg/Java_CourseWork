@@ -6,6 +6,7 @@ import com.example.models.Members;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -128,10 +129,12 @@ public class DatabaseHandler {
      */
     public boolean validateLoginDB(String login, String password){
 
+        String hashPassword = DigestUtils.sha1Hex(password);
+
         String verifyLoginWorkers = "SELECT COUNT(1) FROM workers\n" +
-                "WHERE login = '" + login + "' AND password = '" + password + "';";
+                "WHERE login = '" + login + "' AND password = '" + hashPassword + "';";
         String verifyLoginReaders = "SELECT COUNT(1) FROM library_reader\n" +
-                "WHERE login = '" + login + "' AND password = '" + password + "';";
+                "WHERE login = '" + login + "' AND password = '" + hashPassword + "';";
 
         boolean checkWorkers = false;
         boolean checkReaders = false;
@@ -272,8 +275,11 @@ public class DatabaseHandler {
      * false - запит не виконано
      */
     public boolean addMember (String login, String password, String name, String surname, String phone_number){
+
+        String hashPassword = DigestUtils.sha1Hex(password);
+
         String query = "INSERT INTO library_reader(login, password, name, last_name, phone_num)\n" +
-                "VALUES ('" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + phone_number + "')\n;";
+                "VALUES ('" + login + "', '" + hashPassword + "', '" + name + "', '" + surname + "', '" + phone_number + "')\n;";
         return execAction(query);
     }
 
