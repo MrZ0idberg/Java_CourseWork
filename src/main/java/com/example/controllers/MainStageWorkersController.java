@@ -55,19 +55,19 @@ public class MainStageWorkersController implements Initializable {
      * Обробка подій натиснення на кнопки та відкриття модальних вікон
      */
     public void addBooksButton(ActionEvent event){
-        m.showModalWindow("/makets/AddBook.fxml", event);
+        m.showModalWindow("/makets/AddBook.fxml", event, false);
     }
 
     public void showBooksButton(ActionEvent event){
-        m.showModalWindow("/makets/ViewBooks.fxml", event);
+        m.showModalWindow("/makets/ViewBooks.fxml", event, true);
     }
 
     public void addMemberButton(ActionEvent event){
-        m.showModalWindow("/makets/AddMembers.fxml", event);
+        m.showModalWindow("/makets/AddMembers.fxml", event, false);
     }
 
     public void showMembersButton(ActionEvent event){
-        m.showModalWindow("/makets/ViewMembers.fxml", event);
+        m.showModalWindow("/makets/ViewMembers.fxml", event, true);
     }
 
     /**
@@ -196,7 +196,7 @@ public class MainStageWorkersController implements Initializable {
 
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Помилка");
-                alert.setHeaderText("Помилка при передачі запиту в БД");
+                alert.setHeaderText("Вибрана книжка нікому не видана");
             }
         } else {//Якщо користувач відмовився
 
