@@ -4,7 +4,6 @@ import com.example.FXApp;
 import com.example.database.DatabaseHandler;
 import com.example.models.Books;
 import com.example.models.Members;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,22 +54,18 @@ public class MainStageWorkersController implements Initializable {
     /*
      * Обробка подій натиснення на кнопки та відкриття модальних вікон
      */
-    @FXML
     public void addBooksButton(ActionEvent event){
         m.showModalWindow("/makets/AddBook.fxml", event);
     }
 
-    @FXML
     public void showBooksButton(ActionEvent event){
         m.showModalWindow("/makets/ViewBooks.fxml", event);
     }
 
-    @FXML
     public void addMemberButton(ActionEvent event){
         m.showModalWindow("/makets/AddMembers.fxml", event);
     }
 
-    @FXML
     public void showMembersButton(ActionEvent event){
         m.showModalWindow("/makets/ViewMembers.fxml", event);
     }
@@ -78,7 +73,6 @@ public class MainStageWorkersController implements Initializable {
     /**
      * Завантаження даних про книгу з БД по ID
      */
-    @FXML
     public void loadBookInfo(){
 
         String id = bookIdInfo.getText();
@@ -92,7 +86,6 @@ public class MainStageWorkersController implements Initializable {
     /**
      * Завантаження даних про читача з БД по ID
      */
-    @FXML
     public void loadMemberInfo(){
 
         String memberId = memberIdInfo.getText();
@@ -147,22 +140,20 @@ public class MainStageWorkersController implements Initializable {
                     alert.setTitle("Помилка");
                     alert.setHeaderText("Помилка при передачі запиту в БД");
                 }
-                alert.showAndWait();
 
             } else { //Якщо користувач відмовився
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Скасування");
                 alert.setHeaderText("Видача книжки скасована");
-                alert.showAndWait();
             }
+            alert.showAndWait();
         }
     }
 
     /**
      * Завантаження даних про книгу і про користувача, у кого вона
      */
-    @FXML
     public void loadBookInfoAndMember(){
 
         String bookID = bookIdSecondTAB.getText();
@@ -172,6 +163,50 @@ public class MainStageWorkersController implements Initializable {
         listBookAndMember.getItems().setAll(info);
     }
 
+    /**
+     * Операція повернення книги
+     */
+    public void returnBookButton(){
+
+        String bookID = bookIdSecondTAB.getText();
+
+        Alert alert;
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Підтвердження операції видачі");
+        alert.setContentText("Ви впевнені, що хочете повернути книжку? ");
+        alert.setHeaderText(null);
+
+        Optional<ButtonType> response = alert.showAndWait();
+
+        if(response.get()==ButtonType.OK) {//Якщо користувач дав відповідь "ОК"
+            if (handler.searchRecordID(bookID) != null) {//Якщо є запис в БД (книга видана і не повернена)
+                if (handler.returnBook(bookID)) {
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Книжка повернена успішно");
+                    alert.setContentText(null);
+                } else {//Якщо запит до БД з помилкою
+
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Помилка");
+                    alert.setHeaderText("Помилка при передачі запиту в БД");
+                }
+            } else {
+
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Помилка");
+                alert.setHeaderText("Помилка при передачі запиту в БД");
+            }
+        } else {//Якщо користувач відмовився
+
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Скасування");
+            alert.setHeaderText("Повернення книги скасовано");
+        }
+
+        alert.showAndWait();
+    }
 
 
 

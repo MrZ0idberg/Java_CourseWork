@@ -490,16 +490,7 @@ public class DatabaseHandler {
 
         try {
 
-            /*
-             * Пошук ID запису, якщо книга видана, і вона ще не повернена, то це наш клієнт
-             */
-            query = "SELECT id_accounting_books FROM accounting_books\n" +
-                "WHERE books_id = " + bookID + " \n" +
-                "AND accounting_books.return = 0;";
-            queryResult = execQuery(query);
-            while (queryResult.next()) {
-                recordID = queryResult.getString("id_accounting_books");
-            }
+            recordID = searchRecordID(bookID);
 
             /*
              * Пошук інформації по запису ім'я і прізвище читача, коли видано, ким видано
@@ -544,6 +535,68 @@ public class DatabaseHandler {
         return info;
     }
 
+    /**
+     * Пошук ID запису, якщо книга видана, і вона ще не повернена, то це наш клієнт
+     */
+    public String searchRecordID(String bookID) {
+
+        String recordID = null;
+
+        try {
+
+            String query = "SELECT id_accounting_books FROM accounting_books\n" +
+                    "WHERE books_id = " + bookID + " \n" +
+                    "AND accounting_books.return = 0;";
+            ResultSet queryResult = execQuery(query);
+
+            while (queryResult.next()) {
+                recordID = queryResult.getString("id_accounting_books");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return recordID;
+    }
+
+    /**
+     *
+     * @param bookID ID книги
+     * @return true - якщо операція успішна,
+     * false - якщо ні
+     */
+    public boolean returnBook(String bookID){
+
+        //Зчитуємо ID користувача з файлу налаштувань
+        Properties properties = new Properties();
+        try {
+            FileInputStream in = new FileInputStream("settings.properties");
+            properties.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String workerID = properties.getProperty("system.userID");
+
+        String queryUpdateBook;
+        String queryUpdateRecord;
+
+        String recordID = searchRecordID(bookID);
+
+        //Отримання поточної дати
+        LocalDate date = LocalDate.now();
+        String dateReceive = date.toString();
+
+        queryUpdateBook = "UPDATE books\n" +
+                "SET isAvailable = 1\n" +
+                "WHERE id_books = " + bookID + ";";
+        queryUpdateRecord = "UPDATE accounting_books\n" +
+                "SET return_date = '" + dateReceive + "',\n" +
+                "accounting_books.return = 1,\n" +
+                "receive_worker_id = "+ workerID + "\n" +
+                "WHERE id_accounting_books = " + recordID + ";";
+
+        return execAction(queryUpdateBook) && execAction(queryUpdateRecord);
+    }
 
 
 

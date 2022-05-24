@@ -199,7 +199,7 @@
                                     <HBox alignment="CENTER" prefHeight="65.0" prefWidth="667.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="121.0" text="Оновити" />
-                                          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="123.0" text="Подати" />
+                                          <Button mnemonicParsing="false" onAction="#returnBookButton" prefHeight="38.0" prefWidth="123.0" text="Повернути" />
                                        </children>
                                     </HBox>
                                  </bottom>
