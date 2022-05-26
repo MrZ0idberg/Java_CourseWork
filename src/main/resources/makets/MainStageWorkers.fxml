@@ -20,25 +20,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="865.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainStageWorkersController">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="865.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainStageWorkersController">
    <children>
       <BorderPane prefHeight="460.0" prefWidth="814.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Програма">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#logoutButton" text="Вийти з облікового запису" />
+                        <MenuItem mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Вийти з програми" />
                   </items>
                 </Menu>
               </menus>
@@ -47,7 +38,7 @@
          <right>
             <VBox alignment="CENTER" prefHeight="435.0" prefWidth="181.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addMemberButton" prefHeight="75.0" prefWidth="216.0" text="Додати читача" VBox.vgrow="ALWAYS">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addMemberButton" prefHeight="100.0" prefWidth="181.0" text="Додати читача" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <cursor>
@@ -58,38 +49,42 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBooksButton" prefHeight="75.0" prefWidth="216.0" text="Додати книгу" VBox.vgrow="ALWAYS">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBooksButton" prefHeight="100.0" prefWidth="181.0" text="Додати книгу" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/mainStageWorkers/soloBook.png" />
                            </image></ImageView>
                      </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#showMembersButton" prefHeight="75.0" prefWidth="216.0" text="Список читачів" VBox.vgrow="ALWAYS">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#showMembersButton" prefHeight="100.0" prefWidth="216.0" text="Список читачів" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/mainStageWorkers/manyPeople.png" />
                            </image></ImageView>
                      </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#showBooksButton" prefHeight="75.0" prefWidth="216.0" text="Список книг" VBox.vgrow="ALWAYS">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#showBooksButton" prefHeight="100.0" prefWidth="216.0" text="Список книг" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/mainStageWorkers/manyBook.png" />
                            </image></ImageView>
                      </graphic>
-                  </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="181.0" text="Налаштування" VBox.vgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/mainStageWorkers/шестерня.jpg" />
-                           </image></ImageView>
-                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
                </children>
             </VBox>
@@ -97,7 +92,7 @@
          <center>
             <TabPane prefHeight="435.0" prefWidth="625.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="книжковий випуск">
+                <Tab text="Видати книгу">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -171,7 +166,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#issueBook" prefHeight="33.0" prefWidth="113.0" text=" Випуск" />
+                                          <Button mnemonicParsing="false" onAction="#issueBook" prefHeight="33.0" prefWidth="113.0" text="Видати" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -180,7 +175,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="оновити/подати">
+                <Tab text="Повернути книгу">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

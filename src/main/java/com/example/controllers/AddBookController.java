@@ -4,6 +4,7 @@ import com.example.database.DatabaseHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -21,10 +22,11 @@ public class AddBookController implements Initializable{
     private TextField author;
     @FXML
     private TextField name;
+
     @FXML
-    private TextField genre;
+    private ComboBox<String> genre;
     @FXML
-    private TextField department;
+    private ComboBox<String> department;
 
     @FXML
     private AnchorPane rootPane;
@@ -33,7 +35,10 @@ public class AddBookController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         databaseHandler = DatabaseHandler.getInstance();
+        genre.setItems(databaseHandler.getListGenre());
+        department.setItems(databaseHandler.getListDepartment());
     }
 
     /**
@@ -41,16 +46,22 @@ public class AddBookController implements Initializable{
      */
     @FXML
     public void addBook(){
+
         String bookAuthor = author.getText();
         String bookName = name.getText();
-        String bookGenre = genre.getText();
-        String bookDepartment = department.getText();
+        String bookGenre = genre.getValue();
+        String bookDepartment = department.getValue();
 
         boolean isEmptyTextField = bookAuthor.isEmpty() || bookName.isEmpty()
                 || bookGenre.isEmpty() || bookDepartment.isEmpty();
 
         if(!isEmptyTextField){
-            if(databaseHandler.addBook(bookName, bookAuthor, bookGenre, bookDepartment)){
+
+            //Пошук ID того, що було отримано зі списку, що випадає
+            String idGenre = databaseHandler.searchIdGenre(bookGenre);
+            String idDepartment = databaseHandler.searchIdDepartment(bookDepartment);
+
+            if(databaseHandler.addBook(bookName, bookAuthor, idGenre, idDepartment)){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
                 alert.setContentText("Книжку успішно додано до БД");
