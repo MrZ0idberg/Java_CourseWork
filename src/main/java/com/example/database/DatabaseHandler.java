@@ -253,15 +253,113 @@ public class DatabaseHandler {
      * Внесення книжки в базу даних
      * @param name назва книжки
      * @param author автор книжки
-     * @param genre жанр книжки
-     * @param department відділ зберігання книги
+     * @param idGenre ID жанру книжки
+     * @param idDepartment ID відділу зберігання книги
      * @return true - запит виконано успішно;
      * false - запит не виконано
      */
-    public boolean addBook (String name, String author, String genre, String department){
+    public boolean addBook (String name, String author, String idGenre, String idDepartment){
         String query = "INSERT INTO books(name_book, writer, genre_id, department_id)\n" +
-                "VALUES (\""  + name +  "\", \"" + author + "\", \"" + genre + "\", \""  + department +"\");";
+                "VALUES (\""  + name +  "\", \"" + author + "\", \"" + idGenre + "\", \""  + idDepartment +"\");";
         return execAction(query);
+    }
+
+    /**
+     * Отримання списку жанрів
+     */
+    public ObservableList<String> getListGenre (){
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        String query = "SELECT name_genre FROM book_genre;";
+
+        ResultSet queryResult = execQuery(query);
+        try {
+            while (queryResult.next()){
+
+                String nameGenre = queryResult.getString("name_genre");
+                list.add(nameGenre);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return list;
+    }
+
+    /**
+     * Отримання списку жанрів
+     */
+    public ObservableList<String> getListDepartment (){
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        String query = "SELECT name_department FROM books_department;";
+
+        ResultSet queryResult = execQuery(query);
+        try {
+            while (queryResult.next()){
+
+                String nameGenre = queryResult.getString("name_department");
+                list.add(nameGenre);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return list;
+    }
+
+    /**
+     * Пошук ID відділу, по його назві
+     * @param departmentName назва відділу
+     * @return ID відділу
+     */
+    public String searchIdDepartment(String departmentName){
+
+        String id = null;
+
+        String query = "SELECT id_department FROM books_department\n" +
+                "WHERE name_department = '" + departmentName + "';";
+
+        ResultSet queryResult = execQuery(query);
+        try {
+            while (queryResult.next()){
+                 id = queryResult.getString("id_department");
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return id;
+    }
+
+    /**
+     * Пошук ID жанру, по його назві
+     * @param genreName назва жанру
+     * @return ID відділу
+     */
+    public String searchIdGenre(String genreName){
+
+        String id = null;
+
+        String query = "SELECT id_genre FROM book_genre\n" +
+                "WHERE name_genre = '" + genreName + "';";
+
+        ResultSet queryResult = execQuery(query);
+        try {
+            while (queryResult.next()){
+                id = queryResult.getString("id_genre");
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+        return id;
     }
 
     /**
