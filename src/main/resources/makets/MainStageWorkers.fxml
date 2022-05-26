@@ -92,7 +92,7 @@
          <center>
             <TabPane prefHeight="435.0" prefWidth="625.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="книжковий випуск">
+                <Tab text="Видати книгу">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -166,7 +166,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#issueBook" prefHeight="33.0" prefWidth="113.0" text=" Випуск" />
+                                          <Button mnemonicParsing="false" onAction="#issueBook" prefHeight="33.0" prefWidth="113.0" text="Видати" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -175,7 +175,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="оновити/подати">
+                <Tab text="Повернути книгу">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
