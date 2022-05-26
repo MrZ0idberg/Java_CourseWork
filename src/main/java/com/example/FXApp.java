@@ -41,10 +41,15 @@ public class FXApp extends Application   {
     /**
      * Зміна головної сцени на ту, що в fxml файлі
      */
-    public void changeScene(String fxml) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(root);
-        stg.sizeToScene();
+    public void changeScene(String fxml){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(fxml));
+            stg.getScene().setRoot(root);
+            stg.sizeToScene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -12,13 +12,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainStageWorkersController implements Initializable {
+    @FXML
+    private StackPane rootPane;
 
     @FXML
     private Text nameBook;
@@ -208,6 +212,19 @@ public class MainStageWorkersController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Обробка події натискання на кнопку cancel і закриття програми
+     */
+    public void cancelButtonOnAction(){
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.close();
+    }
 
+    /**
+     * Обробка події натискання на кнопку cancel і закриття програми
+     */
+    public void logoutButton(){
+        m.changeScene("/makets/Login.fxml");
+    }
 
 }
