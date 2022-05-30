@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -84,7 +86,21 @@ public class LoginController implements Initializable {
         if(!connDB.checkConnection()) {
             loginMassageLabel.setText("Відсутній зв'язок з ДП, перевірте налаштування");
         }else if (connDB.validateLoginDB(login, password)){
-            m.changeScene("/makets/MainStageWorkers.fxml");
+
+            Properties properties = new Properties();
+            try {
+                FileInputStream in = new FileInputStream("settings.properties");
+                properties.load(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String post = properties.getProperty("system.userPost");
+
+            if(post.equals("Reader")){
+                m.changeScene("/makets/MainStageReader.fxml");
+            } else {
+                m.changeScene("/makets/MainStageWorkers.fxml");
+            }
         }else{
             loginMassageLabel.setText("Невірна комбінація логіну/паролю");
         }

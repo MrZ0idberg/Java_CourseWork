@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="460.0" minWidth="745.0" prefHeight="460.0" prefWidth="745.0" stylesheets="@../css/Standard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainStageReader">
+   <children>
+      <VBox>
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Програма">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#logoutButton" text="Вийти з облікового запису" />
+                        <MenuItem mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Вийти з програми" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView prefHeight="425.0" prefWidth="610.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn minWidth="102.0" prefWidth="102.0" resizable="false" text="№ запису" />
+                      <TableColumn minWidth="114.0" prefWidth="114.0" text="Назва книги" />
+                        <TableColumn minWidth="122.0" prefWidth="122.0" text="Автор книги" />
+                        <TableColumn minWidth="122.0" prefWidth="122.0" text="Дата видачі" />
+                        <TableColumn minWidth="70.0" prefWidth="148.0" text="Дата повернення" />
+                    </columns>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
