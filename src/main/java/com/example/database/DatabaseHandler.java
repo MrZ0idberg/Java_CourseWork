@@ -3,6 +3,7 @@ package com.example.database;
 import com.example.models.Books;
 import com.example.models.Members;
 
+import com.example.models.OrderView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -447,6 +448,42 @@ public class DatabaseHandler {
             e.getCause();
         }
         return members;
+    }
+
+    /**
+     * Виконання запиту до БД і заповнення списку інформацією про видані книжки читачу
+     * @param idMember ідентифікатор читача
+     * @return список з інформацією, готовою до завантаження в таблицю
+     */
+    public ObservableList<OrderView> getOrder (String idMember){
+        String id, name, writer, dateOut, dateReturn;
+
+        ObservableList<OrderView> order = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT id_accounting_books, name_book, writer, date_out, return_date FROM accounting_books\n" +
+                    "INNER JOIN books\n" +
+                    "\tON accounting_books.books_id = books.id_books\n" +
+                    "WHERE library_reader_id = '" + idMember + "'\n" +
+                    ";";
+
+            ResultSet queryResult = execQuery(query);
+
+            while (queryResult.next()){
+                id = queryResult.getString("id_accounting_books");
+                name = queryResult.getString("name_book");
+                writer = queryResult.getString("writer");
+                dateOut = queryResult.getString("date_out");
+                dateReturn = queryResult.getString("return_date");
+
+
+                order.add(new OrderView(id,name, writer, dateOut, dateReturn));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return order;
     }
 
     /**

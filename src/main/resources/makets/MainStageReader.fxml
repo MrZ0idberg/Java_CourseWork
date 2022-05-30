@@ -26,13 +26,13 @@
             </MenuBar>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView prefHeight="425.0" prefWidth="610.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableView" prefHeight="425.0" prefWidth="610.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn minWidth="102.0" prefWidth="102.0" resizable="false" text="№ запису" />
-                      <TableColumn minWidth="114.0" prefWidth="114.0" text="Назва книги" />
-                        <TableColumn minWidth="122.0" prefWidth="122.0" text="Автор книги" />
-                        <TableColumn minWidth="122.0" prefWidth="122.0" text="Дата видачі" />
-                        <TableColumn minWidth="70.0" prefWidth="148.0" text="Дата повернення" />
+                      <TableColumn fx:id="idCol" minWidth="102.0" prefWidth="102.0" resizable="false" text="№ запису" />
+                      <TableColumn fx:id="nameCol" minWidth="114.0" prefWidth="114.0" text="Назва книги" />
+                        <TableColumn fx:id="authorCol" minWidth="122.0" prefWidth="122.0" text="Автор книги" />
+                        <TableColumn fx:id="dateOutCol" minWidth="122.0" prefWidth="122.0" text="Дата видачі" />
+                        <TableColumn fx:id="dateReturnCol" minWidth="148.0" prefWidth="148.0" text="Дата повернення" />
                     </columns>
                      <opaqueInsets>
                         <Insets />
